@@ -1,7 +1,10 @@
 import React from 'react'
+import PageComponent from '../components/PageComponent'
 
 export default function Survey() {
     return (
-        <div>Survey</div>
+        <PageComponent title="Survey"> 
+            Survey content
+        </PageComponent>
     )
 }
