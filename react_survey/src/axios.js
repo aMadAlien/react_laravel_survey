@@ -2,12 +2,13 @@ import axios from "axios";
 import router from "./router";
 
 const axiosClient = axios.create({
-    baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
+    baseURL: `${import.meta.env.VITE_API_BASE_URL}`,
 })
 
 axiosClient.interceptors.request.use((config) => {
     const token = '1234'; // TODO
     config.headers.Authorization = `Bearer ${token}`
+    return config;
 })
 
 axiosClient.interceptors.response.use(response => {
