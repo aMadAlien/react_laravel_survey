@@ -5,7 +5,7 @@ import PageComponent from '../components/PageComponent'
 import SurvayListItem from '../components/SurvayListItem';
 import { useStateContext } from '../contexts/ContextProvider'
 
-export default function Survey() {
+export default function Surveys() {
     const { surveys } = useStateContext();
 
     const onDeleteClick = () => {
@@ -14,7 +14,7 @@ export default function Survey() {
 
     return (
         <PageComponent
-            title="Survey"
+            title="Surveys"
             buttons={
                 <TButton color='green' to='/survey/create'>
                     <PlusCircleIcon className='h-6 w-6 mr-2' />

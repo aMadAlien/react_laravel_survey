@@ -3,8 +3,10 @@ import { useState } from 'react'
 import TButton from '../components/core/TButton';
 import PageComponent from '../components/PageComponent'
 import axiosClient from '../axios'
+import { useNavigate } from 'react-router';
 
 export default function SurveyView() {
+    const navigate = useNavigate();
     const [survey, setSurvey] = useState({
         title: "",
         slug: "",
@@ -17,19 +19,52 @@ export default function SurveyView() {
     });
 
     const onImageChoose = (ev) => {
-        console.log(ev);
+        const file = ev.target.files[0];
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            setSurvey({
+                ...survey,
+                image: file,
+                image_url: reader.result,
+            });
+
+            ev.target.value = "";
+        };
+        reader.readAsDataURL(file);
     };
 
     const onSubmit = (ev) => {
         ev.preventDefault();
 
-        axiosClient.post("/survey", {
-            title: 'loremmm',
-            description: "desc test",
-            expire_date: "2023-03-08",
-            status: true,
-            questions: []
-        })
+        const payload = { ...survey };
+        if (payload.image) {
+            payload.image = payload.image_url;
+        }
+        delete payload.image_url;
+        let res = null;
+        // if (id) {
+        //     res = axiosClient.put(`/survey/${id}`, payload);
+        // } else {
+            res = axiosClient.post("/survey", payload);
+        // }
+
+        res
+            .then((res) => {
+                console.log(res);
+                navigate("/surveys");
+                // if (id) {
+                //     showToast("The survey was updated");
+                // } else {
+                    // showToast("The survey was created");
+                // }
+            })
+            .catch((err) => {
+                if (err && err.response) {
+                    setError(err.response.data.message);
+                }
+                console.log(err, err.response);
+            });
     };
 
     return (

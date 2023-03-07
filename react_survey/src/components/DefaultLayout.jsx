@@ -8,7 +8,7 @@ import axiosClient from '../axios'
 
 const navigation = [
   { name: 'Dashboard', to: '/' },
-  { name: 'Survey', to: '/survey' },
+  { name: 'Surveys', to: '/surveys' },
 ]
 
 function classNames(...classes) {
