@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 
 export default function SurveyView() {
     const navigate = useNavigate();
+    const [error, setError] = useState('');
     const [survey, setSurvey] = useState({
         title: "",
         slug: "",
@@ -72,9 +73,9 @@ export default function SurveyView() {
             <form action="#" method="POST" onSubmit={onSubmit}>
                 <div className="shadow sm:overflow-hidden sm:rounded-md">
                     <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
-                        {/* {error && (
+                        {error && (
                             <div className="bg-red-500 text-white py-3 px-3">{error}</div>
-                        )} */}
+                        )}
 
                         {/*Image*/}
                         <div>
